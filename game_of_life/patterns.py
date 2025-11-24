@@ -9,9 +9,7 @@ from pathlib import Path
 from game_of_life.errors import PatternParseError
 
 
-COORD_LINE_RE = re.compile(
-    r"^\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)\s+([*.])\s*$"
-)
+COORD_LINE_RE = re.compile(r"^\s*\(\s*(\d+)\s*,\s*(\d+)\s*\)\s+([*.])\s*$")
 """Regex pattern for coordinate lines in format: (row, col) symbol
 
 Matches lines like "(1, 2) *" or "(0,4) ." with flexible whitespace.
@@ -64,9 +62,7 @@ def parse_pattern_file(path: Path):
 
             m = COORD_LINE_RE.match(line)
             if not m:
-                raise PatternParseError(
-                    f"Malformed line {line_no} in {path}: {line!r}"
-                )
+                raise PatternParseError(f"Malformed line {line_no} in {path}: {line!r}")
 
             row = int(m.group(1))
             col = int(m.group(2))

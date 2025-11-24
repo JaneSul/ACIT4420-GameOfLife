@@ -29,7 +29,7 @@ def animate_game(pattern_file, rows=20, cols=20, generations=100):
     fig, ax = plt.subplots()
     ax.set_title("Conway's Game of Life Simulation")
 
-    img = ax.imshow(board.grid, cmap='binary')
+    img = ax.imshow(board.grid, cmap="binary")
 
     def update(frame):
         """Updates the board state for each animation frame.
@@ -46,11 +46,7 @@ def animate_game(pattern_file, rows=20, cols=20, generations=100):
         return [img]
 
     ani = animation.FuncAnimation(
-        fig,
-        update,
-        frames=generations,
-        interval=200,
-        blit=True
+        fig, update, frames=generations, interval=200, blit=True
     )
 
     plt.show()

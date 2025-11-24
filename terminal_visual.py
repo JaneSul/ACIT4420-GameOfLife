@@ -43,7 +43,7 @@ def run(pattern_file, rows=20, cols=20, generations=100):
     board.load_pattern(pattern_file)
 
     for gen in range(generations):
-        os.system('cls' if os.name == 'nt' else 'clear')
+        os.system("cls" if os.name == "nt" else "clear")
         print(f"Generation {gen}")
         print_grid(board.grid)
         board.grid = evolve_grid(board.grid)

@@ -33,9 +33,11 @@ def register_rule(name: str):
         Decorator function that registers and returns the rule function unchanged.
 
     """
+
     def decorator(func: RuleFunc) -> RuleFunc:
         _RULES_REGISTRY[name] = func
         return func
+
     return decorator
 
 
@@ -55,7 +57,9 @@ def get_rule(name: str) -> RuleFunc:
     try:
         return _RULES_REGISTRY[name]
     except KeyError:
-        raise ValueError(f"Unknown rule set: {name}. Registered: {list(_RULES_REGISTRY)}")
+        raise ValueError(
+            f"Unknown rule set: {name}. Registered: {list(_RULES_REGISTRY)}"
+        )
 
 
 @register_rule("conway")
