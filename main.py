@@ -1,3 +1,9 @@
+"""Batch simulation runner for Conway's Game of Life with snapshot logging.
+
+This module provides functionality to run simulations without visualization,
+saving the state of each generation to disk for later analysis or replay.
+Useful for long-running simulations or batch processing of multiple patterns.
+"""
 
 from pathlib import Path
 from datetime import datetime
@@ -14,12 +20,31 @@ def run_simulation(
     rule_name: str = "conway",
     log_dir: str = "logs",
 ):
-    """
-    Run a simulation from a pattern file for a fixed number of generations,
-    saving snapshots to disk.
+    """Runs a headless Game of Life simulation with generation snapshots.
+
+    Loads an initial pattern and evolves it for the specified number of
+    generations, saving each state to a timestamped text file in the log
+    directory. This enables batch processing and post-simulation analysis
+    without real-time visualization overhead.
+
+    Args:
+        pattern_file: Path to text file containing the initial pattern.
+        rows: Number of rows in the game board grid. Defaults to 20.
+        cols: Number of columns in the game board grid. Defaults to 20.
+        generations: Number of generations to simulate. Defaults to 10.
+        rule_name: Rule set to apply (e.g., "conway"). Defaults to "conway".
+        log_dir: Directory path where snapshots will be saved. Defaults to "logs".
+
+    Raises:
+        SimulationOverflowError: If generations exceeds 10,000 (safety limit).
+        GameOfLifeError: If pattern loading or board operations fail.
+
+    Note:
+        Files are named with the pattern:
+        {pattern_name}_{rule}_{generation}_{timestamp}.txt
+        This allows multiple runs to coexist without overwriting.
     """
     if generations > 10_000:
-        # Example safeguard
         raise SimulationOverflowError(f"Too many generations: {generations}")
 
     board = Board(rows, cols)
@@ -41,7 +66,6 @@ def run_simulation(
 
 
 if __name__ == "__main__":
-    # Simple CLI interface; could be extended with argparse
     try:
         run_simulation(
             pattern_file="patterns/blinker.txt",
