@@ -14,7 +14,6 @@ This project demonstrates:
 
 - Modular Python package design
 - Classes, functions, decorators (metaprogramming)
-- NumPy array operations + custom exceptions
 - File I/O (pattern loading/saving)
 - Logging & performance timing
 - CLI interface
